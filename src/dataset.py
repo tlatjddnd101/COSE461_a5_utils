@@ -142,7 +142,34 @@ Here are some examples of input-output pairs (x, y):
 
 """
 
-# Class here is defined at Colab
+class CharCorruptionDataset(Dataset):
+    def __init__(self, data, block_size):
+        self.MASK_CHAR = u"\u2047" # the doublequestionmark character, for mask
+        self.PAD_CHAR = u"\u25A1" # the empty square character, for pad
+
+        chars = list(sorted(list(set(data))))
+        assert self.MASK_CHAR not in chars 
+        assert self.PAD_CHAR not in chars
+        chars.insert(0, self.MASK_CHAR)
+        chars.insert(0, self.PAD_CHAR)
+
+        self.stoi = { ch:i for i,ch in enumerate(chars) }
+        self.itos = { i:ch for i,ch in enumerate(chars) }
+
+        data_size, vocab_size = len(data), len(chars)
+        print('data has %d characters, %d unique.' % (data_size, vocab_size))
+
+        self.block_size = block_size
+        self.vocab_size = vocab_size
+        self.data = data.split('\n')
+
+    def __len__(self):
+        # returns the length of the dataset
+        return len(self.data)
+
+    def __getitem__(self, idx):
+        # TODO [part e]: see spec above
+        raise NotImplementedError
 
 """
 Code under here is strictly for your debugging purposes; feel free to modify
