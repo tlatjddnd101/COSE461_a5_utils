@@ -33,7 +33,7 @@ class TrainerConfig:
     num_workers = 0 # for DataLoader
 
     def __init__(self, **kwargs):
-        for k,v in kwargs.items():
+        for k, v in kwargs.items():
             setattr(self, k, v)
 
 class Trainer:
