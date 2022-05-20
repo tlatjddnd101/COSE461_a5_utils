@@ -69,7 +69,7 @@ class Trainer:
             {"params": params_decay, "weight_decay": config.weight_decay},
             {"params": params_nodecay, "weight_decay": 0.0},
         ]
-        optimizer = optim.AdamW(optim_groups, lr=config.learning_rate, betas=config.betas)
+        optimizer = optim.AdamW(optim_groups, lr = config.learning_rate, betas = config.betas)
 
         def run_epoch(split):
             is_train = split == 'train'
@@ -78,7 +78,7 @@ class Trainer:
             loader = DataLoader(data, batch_size=config.batch_size, num_workers=config.num_workers)
 
             losses = []
-            pbar = tqdm(enumerate(loader), total=len(loader)) if is_train else enumerate(loader)
+            pbar = tqdm(enumerate(loader), total = len(loader)) if is_train else enumerate(loader)
             for it, (x, y) in pbar:
 
                 # place data on the correct device
@@ -116,7 +116,7 @@ class Trainer:
                         lr = config.learning_rate
 
                     # report progress
-                    pbar.set_description(f"epoch {epoch+1} iter {it}: train loss {loss.item():.5f}. lr {lr:e}")
+                    pbar.set_description(f"epoch {epoch + 1} iter {it}: train loss {loss.item():.5f}. lr {lr:e}")
 
             if not is_train:
                 logger.info("test loss: %f", np.mean(losses))
