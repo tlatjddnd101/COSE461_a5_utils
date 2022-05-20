@@ -28,7 +28,7 @@ class NameDataset(Dataset):
         self.itos = pretraining_dataset.itos 
         self.stoi = pretraining_dataset.stoi 
         self.block_size = pretraining_dataset.block_size
-        self.data = list(data.encode('utf-8').decode('ascii', errors='ignore').split('\n'))
+        self.data = list(data.encode('utf-8').decode('ascii', errors = 'ignore').split('\n'))
 
     def __len__(self):
         # returns the length of the dataset
@@ -41,8 +41,8 @@ class NameDataset(Dataset):
         y = self.PAD_CHAR*(len(inp)-1) + x[len(inp):]
         
         x = x[:-1]
-        x = torch.tensor([self.stoi[c] for c in x], dtype=torch.long)
-        y = torch.tensor([self.stoi[c] for c in y], dtype=torch.long)
+        x = torch.tensor([self.stoi[c] for c in x], dtype = torch.long)
+        y = torch.tensor([self.stoi[c] for c in y], dtype = torch.long)
         return x, y
 
 
