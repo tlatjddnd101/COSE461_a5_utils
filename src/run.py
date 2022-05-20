@@ -130,6 +130,5 @@ elif args.function == 'evaluate':
     if total > 0:
         print('Correct: {} out of {}: {}%'.format(correct, total, correct/total*100))
     else:
-        print('Predictions written to {}; no targets provided'
-                .format(args.outputs_path))
+        print('Predictions written to {}; no targets provided'.format(args.outputs_path))
 
