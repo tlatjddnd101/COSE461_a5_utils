@@ -14,22 +14,18 @@ import utils
 
 argp = argparse.ArgumentParser()
 argp.add_argument('function',
-    help="Whether to pretrain, finetune or evaluate a model",
-    choices=["pretrain", "finetune", "evaluate"])
+                  help="Whether to pretrain, finetune or evaluate a model",
+                  choices=["pretrain", "finetune", "evaluate"])
 argp.add_argument('variant',
-    help="Which variant of the model to run ('vanilla' or 'synthesizer')",
-    choices=["vanilla", "synthesizer"])
-argp.add_argument('pretrain_corpus_path',
-    help="Path of the corpus to pretrain on", default=None)
+                  help="Which variant of the model to run ('vanilla' or 'synthesizer')",
+                  choices=["vanilla", "synthesizer"])
+argp.add_argument('pretrain_corpus_path', help="Path of the corpus to pretrain on", default=None)
 argp.add_argument('--reading_params_path',
-    help="If specified, path of the model to load before finetuning/evaluation",
-    default=None)
-argp.add_argument('--writing_params_path',
-    help="Path to save the model after pretraining/finetuning", default=None)
-argp.add_argument('--finetune_corpus_path',
-    help="Path of the corpus to finetune on", default=None)
-argp.add_argument('--eval_corpus_path',
-    help="Path of the corpus to evaluate on", default=None)
+                  help="If specified, path of the model to load before finetuning/evaluation",
+                  default=None)
+argp.add_argument('--writing_params_path', help="Path to save the model after pretraining/finetuning", default=None)
+argp.add_argument('--finetune_corpus_path', help="Path of the corpus to finetune on", default=None)
+argp.add_argument('--eval_corpus_path', help="Path of the corpus to evaluate on", default=None)
 argp.add_argument('--outputs_path', default=None)
 args = argp.parse_args()
 
@@ -47,8 +43,7 @@ pretrain_dataset = dataset.CharCorruptionDataset(text, block_size)
 
 # We don't suggest you change these hyperparameters, as they're known to work.
 # use them for both the vanilla and the synthesizer models
-mconf = model.GPTConfig(pretrain_dataset.vocab_size, pretrain_dataset.block_size,
-    n_layer=4, n_head=8, n_embd=256)
+mconf = model.GPTConfig(pretrain_dataset.vocab_size, pretrain_dataset.block_size, n_layer=4, n_head=8, n_embd=256)
 
 """
 Don't change above here; write your code below
