@@ -60,7 +60,7 @@ class Block(nn.Module):
         return x
 
 class GPT(nn.Module):
-    """  the full GPT language model, with a context size of block_size """
+    """  the full GPT language model with a context size of block_size """
 
     def __init__(self, config):
         super().__init__()
