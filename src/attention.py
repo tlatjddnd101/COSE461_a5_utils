@@ -42,7 +42,7 @@ class CausalSelfAttention(nn.Module):
         # causal self-attention; Self-attend: (B, nh, T, hs) x (B, nh, hs, T) -> (B, nh, T, T)
         att = (q @ k.transpose(-2, -1)) * (1.0 / math.sqrt(k.size(-1)))
         att = att.masked_fill(self.mask[:,:,:T,:T] == 0, -1e10) # todo: just use float('-inf') instead?
-        att = F.softmax(att, dim=-1)
+        att = F.softmax(att, dim = -1)
         att = self.attn_drop(att)
         y = att @ v # (B, nh, T, T) x (B, nh, T, hs) -> (B, nh, T, hs)
         y = y.transpose(1, 2).contiguous().view(B, T, C) # re-assemble all head outputs side by side
@@ -63,8 +63,8 @@ class SynthesizerAttention(nn.Module):
         # NEW learnable weights
         self.w1 = nn.Linear(config.n_embd, config.n_embd)
         self.w2 = nn.Parameter(torch.zeros(config.n_embd // config.n_head,
-            config.block_size-1))
-        self.b2 = nn.Parameter(torch.zeros(config.block_size-1))
+            config.block_size - 1))
+        self.b2 = nn.Parameter(torch.zeros(config.block_size - 1))
         # value projection
         self.value = nn.Linear(config.n_embd, config.n_embd)
         # regularization
