@@ -38,7 +38,7 @@ class NameDataset(Dataset):
         inp, oup = self.data[idx].split('\t')
         x = inp + self.MASK_CHAR + oup + self.MASK_CHAR
         x = x + self.PAD_CHAR*(self.block_size - len(x))
-        y = self.PAD_CHAR*(len(inp)-1) + x[len(inp):]
+        y = self.PAD_CHAR*(len(inp) - 1) + x[len(inp):]
         
         x = x[:-1]
         x = torch.tensor([self.stoi[c] for c in x], dtype = torch.long)
